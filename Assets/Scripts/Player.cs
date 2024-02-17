@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
 
         // Se comprueba si el Raycast esta colisionando con algo(Si colisiona con algo es con el suelo)
-        if (Physics.Raycast(ray.origin, ray.direction, 5))
+        if (Physics.Raycast(ray.origin, ray.direction, 1))
         {
             // Desplazamiento del objeto en funcion de los inputs, la velocidad y el tiempo
             transform.Translate(new Vector3(horizontalInput, 0, verticalInput) * velocidadMovimiento * Time.deltaTime);
@@ -96,8 +96,8 @@ public class Player : MonoBehaviour
     private void raycast(float posX, float posZ)
     {
         // Modificacion de los valores
-        posX = posX > 0 ? 1 : posX < 0 ? -1 : 0;
-        posZ = posZ > 0 ? 1 : posZ < 0 ? -1 : 0;
+        posX = posX > 0 ? 0.2f : posX < 0 ? -0.2f : 0;
+        posZ = posZ > 0 ? 0.2f : posZ < 0 ? -0.2f : 0;
         // Actualizacion del raycast
         ray = new Ray(new Vector3(transform.position.x + posX, transform.position.y, transform.position.z + posZ), -transform.up);
     }
