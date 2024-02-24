@@ -13,15 +13,15 @@ public class Player : MonoBehaviour
     private float horizontalInput;
     // Variable interna dedicada al input introducido por el jugador para el eje vertical
     private float verticalInput;
-
+    // Elemento Raycast
     Ray ray;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        // Creacion del Raycast
         ray = new Ray(transform.position, -transform.up);
-        
     }
 
     // Update is called once per frame
@@ -36,9 +36,11 @@ public class Player : MonoBehaviour
      */
     private void movimiento() 
     {
-        // Variables de apoyo para almacenar que direccion se bloqueara
+        // Variables de apoyo para almacenar que direccion se bloqueara (Visto desde arriba)
+        // Movimiento Horizontal
         bool horPos = true;
         bool horNeg = true;
+        // Movimiento Vertical
         bool verPos = true;
         bool verNeg = true;
 
@@ -48,7 +50,7 @@ public class Player : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
 
         // Se comprueba si el Raycast esta colisionando con algo(Si colisiona con algo es con el suelo)
-        if (Physics.Raycast(ray.origin, ray.direction, 5))
+        if (Physics.Raycast(ray.origin, ray.direction, 1))
         {
             // Desplazamiento del objeto en funcion de los inputs, la velocidad y el tiempo
             transform.Translate(new Vector3(horizontalInput, 0, verticalInput) * velocidadMovimiento * Time.deltaTime);
@@ -60,7 +62,10 @@ public class Player : MonoBehaviour
         }
         else
         {
-            // En funcion del valor de la direccion, se bloquea hacia un lado u otro
+            // En funcion del valor de la direccion, se bloquea hacia un lado u otro.
+            // Se comprueban ambos para bloquear, en caso necesario, la diagonal
+
+            // Comprobacion del movimiento horizontal
             if (horizontalInput > 0)
             {
                 horPos = false;
@@ -70,6 +75,7 @@ public class Player : MonoBehaviour
                 horNeg = false;
             }
 
+            // Comprobacion del movimiento vertical
             if (verticalInput > 0)
             {
                 verPos = false;
@@ -79,6 +85,7 @@ public class Player : MonoBehaviour
                 verNeg = false;
             }
 
+            // Se aplican las restricciones necesarias en funcion de la direccion bloqueada
             float movimientoHorizontal = !horPos ? Mathf.Clamp(horizontalInput, -1, 0) : !horNeg ? Mathf.Clamp(horizontalInput, 0, 1) : 0;
             float movimientoVertical = !verPos ? Mathf.Clamp(verticalInput, -1, 0) : !verNeg ? Mathf.Clamp(verticalInput, 0, 1) : 0;
             // Desplazamiento aplicando las distintas restricciones
@@ -96,8 +103,8 @@ public class Player : MonoBehaviour
     private void raycast(float posX, float posZ)
     {
         // Modificacion de los valores
-        posX = posX > 0 ? 1 : posX < 0 ? -1 : 0;
-        posZ = posZ > 0 ? 1 : posZ < 0 ? -1 : 0;
+        posX = posX > 0 ? 0.1f : posX < 0 ? -0.1f : 0;
+        posZ = posZ > 0 ? 0.1f : posZ < 0 ? -0.1f : 0;
         // Actualizacion del raycast
         ray = new Ray(new Vector3(transform.position.x + posX, transform.position.y, transform.position.z + posZ), -transform.up);
     }
