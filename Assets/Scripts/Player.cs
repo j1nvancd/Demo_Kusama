@@ -15,7 +15,19 @@ public class Player : MonoBehaviour
     private float verticalInput;
     // Elemento Raycast
     Ray ray;
+    // Objeto estatico del jugador para el resto de scripts
+    public static Player jugador;
+    // Variable para almacenar el objeto que lleva
+    public Object objeto;
 
+    private void Awake()
+    {
+        // Asignacion de la instancia del jugador mediante patron Singleton
+        if (jugador == null)
+        {
+            jugador = this;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -107,5 +119,33 @@ public class Player : MonoBehaviour
         posZ = posZ > 0 ? 0.1f : posZ < 0 ? -0.1f : 0;
         // Actualizacion del raycast
         ray = new Ray(new Vector3(transform.position.x + posX, transform.position.y, transform.position.z + posZ), -transform.up);
+    }
+
+    /*
+     * Metodo para recoger el objeto deseado
+     * 
+     * Parametros: Object
+     */
+    public void recogerObjeto(Object objeto)
+    {
+        // En caso de ser nulo(no tiene objeto vinculado/recogido) se asigna el objeto
+        if (this.objeto == null)
+        {
+            this.objeto = objeto;
+        }
+    }
+
+    /*
+     * Metodo para soltar el objeto
+     */
+    public void soltarObjeto()
+    {
+        // En caso de tener un objeto recogido, se suelta el mismo
+        if (objeto != null)
+        {
+            objeto.soltado = true;
+            objeto.transform.SetParent(null);
+            objeto = null;
+        }
     }
 }
