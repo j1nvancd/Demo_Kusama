@@ -10,7 +10,7 @@ public class Object : MonoBehaviour
     // Variable de apoyo para marcar cuando se encuentra en el area
     private bool estaCerca = false;
     // Objeto vinculado al canvas que muestra el texto
-    //[SerializeField]private Canvas canvas;
+    [SerializeField]private Canvas canvas;
     // Variable para almacenar al jugador
     private Player jugador;
     // Variables para almacenar el estado del objeto
@@ -27,7 +27,7 @@ public class Object : MonoBehaviour
         soltado = false;
         jugador = Player.jugador;
         // Al iniciar el juego, el canvas se oculta
-        //canvas.enabled = false;
+        canvas.enabled = false;
     }
 
     // Update is called once per frame
@@ -41,7 +41,7 @@ public class Object : MonoBehaviour
         // En caso de que haya sido recogido pero aun no se haya soltado, el objeto sigue al jugador
         if (recogido && !soltado)
         {
-            transform.position = new Vector3(jugador.transform.position.x + 1, jugador.transform.position.y, jugador.transform.position.z + 1);
+            transform.position = new Vector3(jugador.transform.position.x - 1, jugador.transform.position.y, jugador.transform.position.z - 1);
         }
     }
 
@@ -54,7 +54,7 @@ public class Object : MonoBehaviour
         if (other.CompareTag("Jugador"))
         {
             // Activacion del objeto que muestra el texto
-            //canvas.enabled = true;
+            canvas.enabled = true;
             // Activacion del indicador de zona
             estaCerca = true;
         }
@@ -68,7 +68,7 @@ public class Object : MonoBehaviour
         if (other.CompareTag("Jugador"))
         {
             // Desactivacion del objeto que muestra el texto
-            //canvas.enabled = false;
+            canvas.enabled = false;
             // Desactivacion del indicador de zona
             estaCerca = false;
         }
