@@ -5,7 +5,7 @@ using UnityEngine;
 /*
  * Script vinculado al GameObject del objeto - Object
  */
-public class Object : MonoBehaviour
+public class Objeto : MonoBehaviour
 {
     // Variable de apoyo para marcar cuando se encuentra en el area
     private bool estaCerca = false;

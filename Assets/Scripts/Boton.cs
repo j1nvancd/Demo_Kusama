@@ -26,7 +26,7 @@ public class Boton : MonoBehaviour
     // Variable para almacenar el objeto Player
     //private Player jugador;
     // Variable para vincular el objeto requerido para el boton
-    [SerializeField] private Object objetoRequerido;
+    [SerializeField] private Objeto objetoRequerido;
 
     void Start()
     {

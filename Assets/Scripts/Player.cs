@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     // Objeto estatico del jugador para el resto de scripts
     public static Player jugador;
     // Variable para almacenar el objeto que lleva
-    public Object objeto;
+    public Objeto objeto;
 
     private void Awake()
     {
@@ -126,7 +126,7 @@ public class Player : MonoBehaviour
      * 
      * Parametros: Object
      */
-    public void recogerObjeto(Object objeto)
+    public void recogerObjeto(Objeto objeto)
     {
         // En caso de ser nulo(no tiene objeto vinculado/recogido) se asigna el objeto
         if (this.objeto == null)
