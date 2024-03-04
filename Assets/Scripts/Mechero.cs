@@ -6,17 +6,19 @@ public class Mechero : MonoBehaviour
 {
     [SerializeField] private Canvas canvas;
     private bool estaCerca;
-
+    Player jugador;
     private void Start()
     {
         estaCerca = false;
         canvas.enabled = false;
+        jugador = FindObjectOfType<Player>();
     }
 
     private void Update()
     {
         if (estaCerca && Input.GetMouseButtonUp(0))
         {
+            jugador.mechero = true;
             Destroy(gameObject);
         }
     }

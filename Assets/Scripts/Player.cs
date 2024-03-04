@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     public static Player jugador;
     // Variable para almacenar el objeto que lleva
     public Objeto objeto;
+    // Variable para almacenar el estado del mechero. True = mechero recogido
+    public bool mechero = false;
 
     private void Awake()
     {
