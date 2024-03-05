@@ -5,17 +5,21 @@ using UnityEngine;
 /*
  * Script vinculado al GameObject del objeto - Object
  */
-public class Object : MonoBehaviour
+public class PlantaFinal : MonoBehaviour
 {
     // Variable de apoyo para marcar cuando se encuentra en el area
     private bool estaCerca = false;
     // Objeto vinculado al canvas que muestra el texto
     [SerializeField]private Canvas canvas;
+    // Variable para almacenar al jugador
+    private Player jugador;
 
+    [SerializeField] public GameObject raices;
 
     // Start is called before the first frame update
     void Start()
     {
+        jugador = Player.jugador;
         // Al iniciar el juego, el canvas se oculta
         canvas.enabled = false;
     }
@@ -42,8 +46,6 @@ public class Object : MonoBehaviour
             canvas.enabled = true;
             // Activacion del indicador de zona
             estaCerca = true;
-            // Señal para desarrollo
-            Debug.Log("Se ha entrado en el collider");
         }
     }
 
@@ -58,8 +60,6 @@ public class Object : MonoBehaviour
             canvas.enabled = false;
             // Desactivacion del indicador de zona
             estaCerca = false;
-            // Señal para desarrollo
-            Debug.Log("Se ha salido del collider");
         }
     }
 
@@ -68,9 +68,15 @@ public class Object : MonoBehaviour
      */
     void AgarrarObjeto()
     {
-        // Señal para desarrollo
-        Debug.Log("OBJETO RECOGIDO");
-        // Destruccion del objeto
-        Destroy(gameObject);
+        // Asociacion del objeto Jugador de la jerarquia
+        Player jugador = FindObjectOfType<Player>();
+        Debug.Log(jugador);
+        Debug.Log("" + jugador != null + " , " + jugador.mechero + " , " + !raices.activeInHierarchy);
+        // En caso de que el jugador no sea nulo y el jugador no haya recogido un objeto aun, se cambia el estado del objeto y se recoge el mismo
+        if (jugador != null && jugador.mechero && !raices.activeInHierarchy)
+        {
+            Debug.Log("Ha entrado en el if");
+            Destroy(gameObject);
+        }
     }
 }
