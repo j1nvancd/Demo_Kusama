@@ -18,18 +18,21 @@ public class Escalera: MonoBehaviour
     // Objeto para vincular la referencia al punto bajo de la escalera
     [SerializeField] private GameObject puntoBajo;
 
+    private bool enEscalera;
+
     // Start is called before the first frame update
     void Start()
     {
         // Al iniciar el juego, el canvas se oculta
         //canvas.enabled = false;
+        enEscalera = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         // Se activa la funcion para subir/bajar solamente cuando los colliders esten contactando y se pulse el boton principal del raton
-        if (Input.GetMouseButtonUp(0) && estaCerca)
+        if (Input.GetMouseButtonUp(0) && estaCerca && !enEscalera)
         {
             // Obtener las posiciones absolutas de los puntos alto y bajo con respecto al mundo
             Vector3 posicionPuntoAlto = puntoAlto.transform.position;
@@ -93,6 +96,8 @@ public class Escalera: MonoBehaviour
         float tiempoVertical = 2f;
         float tiempoHorizontal = 0.7f;
 
+        enEscalera = true;
+
         // Se realiza primero el movimiento vertical y, al completarlo, se desplaza horizontalmente
 
         // Mientras la altura del jugador siga siendo menor a la altura del punto
@@ -115,6 +120,8 @@ public class Escalera: MonoBehaviour
             
             yield return null;
         }
+
+        enEscalera = false;
     }
 
     /*
@@ -130,6 +137,7 @@ public class Escalera: MonoBehaviour
         float tiempoVertical = 2f;
         float tiempoHorizontal = 0.7f;
 
+        enEscalera = true;
         // Se realiza primero el movimiento horizontal
 
         // Mientras aun no se haya llegado a la posicion
@@ -153,6 +161,8 @@ public class Escalera: MonoBehaviour
 
             yield return null;
         }
+
+        enEscalera = false;
     }
 
 }
