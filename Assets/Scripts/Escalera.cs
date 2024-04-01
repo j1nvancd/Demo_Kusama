@@ -18,6 +18,8 @@ public class Escalera: MonoBehaviour
     // Objeto para vincular la referencia al punto bajo de la escalera
     [SerializeField] private GameObject puntoBajo;
 
+    // PuntoAltoPeluche, PuntoBajoPeluche + diferencia posicion + Repetir Lerp + Mirar el transform del peluche
+
     private bool enEscalera;
 
     // Start is called before the first frame update
@@ -94,14 +96,14 @@ public class Escalera: MonoBehaviour
         float t = 0f;
         // Tiempos asignados a cada movimiento
         float tiempoVertical = 2f;
-        float tiempoHorizontal = 0.7f;
+        float tiempoHorizontal = 1f;
 
         enEscalera = true;
 
         // Se realiza primero el movimiento vertical y, al completarlo, se desplaza horizontalmente
 
         // Mientras la altura del jugador siga siendo menor a la altura del punto
-        while (player.transform.position.y < fin.y && t < tiempoVertical) 
+        while (player.transform.position.y < fin.y && t <= tiempoVertical) 
         {
             t += Time.deltaTime;
             player.transform.position = Vector3.Lerp(inicio, new Vector3(inicio.x, fin.y, inicio.z), t / tiempoVertical);
@@ -113,7 +115,7 @@ public class Escalera: MonoBehaviour
         // Reinicializacion del tiempo transcurrido
         t = 0f;
         // Mientras aun no se haya llegado a la posicion
-        while (player.transform.position != fin && t < tiempoHorizontal)
+        while (player.transform.position != fin && t <= tiempoHorizontal)
         {
             t += Time.deltaTime;
             player.transform.position = Vector3.Lerp(posicionIntermedia, fin, t / tiempoHorizontal);
@@ -135,13 +137,13 @@ public class Escalera: MonoBehaviour
         float t = 0f;
         // Tiempos asignados a cada movimiento
         float tiempoVertical = 2f;
-        float tiempoHorizontal = 0.7f;
+        float tiempoHorizontal = 1f;
 
         enEscalera = true;
         // Se realiza primero el movimiento horizontal
 
         // Mientras aun no se haya llegado a la posicion
-        while (player.transform.position != fin && t < tiempoHorizontal)
+        while (player.transform.position != fin && t <= tiempoHorizontal)
         {
             t += Time.deltaTime;
             player.transform.position = Vector3.Lerp(inicio, new Vector3(fin.x, inicio.y, fin.z), t / tiempoHorizontal);
@@ -154,7 +156,7 @@ public class Escalera: MonoBehaviour
         t = 0f;
         
         // Mientras no se haya llegado al punto bajo
-        while (player.transform.position.y > fin.y && t < tiempoVertical)
+        while (player.transform.position.y > fin.y && t <= tiempoVertical)
         {
             t += Time.deltaTime;
             player.transform.position = Vector3.Lerp(posicionIntermedia, fin, t / tiempoVertical);
