@@ -4787,6 +4787,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &599855701
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 599855702}
+  m_Layer: 0
+  m_Name: PuntoAltoPeluche
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &599855702
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599855701}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.41, y: 3.104, z: -0.813}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 792000879}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &604900175
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6485,6 +6516,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4891787282750124, guid: 7087784e228be8745af45599a5130532, type: 3}
       insertIndex: -1
       addedObject: {fileID: 262033063}
+    - targetCorrespondingSourceObject: {fileID: 4891787282750124, guid: 7087784e228be8745af45599a5130532, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 599855702}
+    - targetCorrespondingSourceObject: {fileID: 4891787282750124, guid: 7087784e228be8745af45599a5130532, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1677347142}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1438797800468804, guid: 7087784e228be8745af45599a5130532, type: 3}
       insertIndex: -1
@@ -15578,6 +15615,8 @@ MonoBehaviour:
   player: {fileID: 1060633300}
   puntoAlto: {fileID: 1520034045}
   puntoBajo: {fileID: 1029569032}
+  puntoAltoPeluche: {fileID: 0}
+  puntoBajoPeluche: {fileID: 0}
 --- !u!136 &1644157636
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -15643,6 +15682,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 1975965018}
   soltado: 0
+  subiendo: 0
 --- !u!54 &1655346034
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15907,6 +15947,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2071638386108321232, guid: 67208c15c50929340a5cab5b849ddae8, type: 3}
   m_PrefabInstance: {fileID: 1672045064}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1677347141
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1677347142}
+  m_Layer: 0
+  m_Name: PuntoBajoPeluche
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1677347142
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677347141}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.41, y: 0.082, z: 0.406}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 792000879}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1687612112
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16102,6 +16173,8 @@ MonoBehaviour:
   player: {fileID: 1060633300}
   puntoAlto: {fileID: 1195059193}
   puntoBajo: {fileID: 1527462066}
+  puntoAltoPeluche: {fileID: 0}
+  puntoBajoPeluche: {fileID: 0}
 --- !u!1001 &1699428484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18180,9 +18253,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac6eefaaec9a074ea6e84fa72b99907, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1060633300}
+  player: {fileID: 1060633302}
   puntoAlto: {fileID: 134834608}
   puntoBajo: {fileID: 262033062}
+  puntoAltoPeluche: {fileID: 599855701}
+  puntoBajoPeluche: {fileID: 1677347141}
 --- !u!136 &1915189733
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -18463,15 +18538,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5da12c64b663e3449b57ab5b6345ad62, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.92
+      value: 2.04
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5da12c64b663e3449b57ab5b6345ad62, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.309999
+      value: 6.13
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5da12c64b663e3449b57ab5b6345ad62, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.822
+      value: -2.17
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5da12c64b663e3449b57ab5b6345ad62, type: 3}
       propertyPath: m_LocalRotation.w
@@ -18597,6 +18672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 1704190468}
   soltado: 0
+  subiendo: 0
 --- !u!1 &1963472537
 GameObject:
   m_ObjectHideFlags: 0

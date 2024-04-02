@@ -19,12 +19,15 @@ public class Objeto : MonoBehaviour
     // Soltado = el jugador ha soltado el objeto
     public bool soltado;
 
+    public bool subiendo;
+
     // Start is called before the first frame update
     void Start()
     {
         // Inicializacion de las variables de estado
         recogido = false;
         soltado = false;
+        subiendo = false;
         jugador = Player.jugador;
         // Al iniciar el juego, el canvas se oculta
         canvas.enabled = false;
@@ -39,7 +42,7 @@ public class Objeto : MonoBehaviour
             AgarrarObjeto();
         }
         // En caso de que haya sido recogido pero aun no se haya soltado, el objeto sigue al jugador
-        if (recogido && !soltado)
+        if (recogido && !soltado && !subiendo)
         {
             transform.position = new Vector3(jugador.transform.position.x - 1, jugador.transform.position.y, jugador.transform.position.z - 1);
         }
