@@ -23,14 +23,11 @@ public class Boton : MonoBehaviour
     // Variables para almacenar el tamaño y la escala final
     private Vector3 escalaFinal;
     private Vector3 posicionFinal;
-    // Variable para almacenar el objeto Player
-    //private Player jugador;
     // Variable para vincular el objeto requerido para el boton
     [SerializeField] private Objeto objetoRequerido;
 
     void Start()
     {
-        //jugador = Player.jugador;
         // Recogida de las medidas originales
         escalaOriginal = puente.transform.localScale;
         posicionOriginal = puente.transform.position;

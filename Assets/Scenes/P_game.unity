@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44677222, g: 0.4917413, b: 0.54860383, a: 1}
+  m_IndirectSpecularColor: {r: 0.44680095, g: 0.49179405, b: 0.5487092, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9139,15 +9139,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6889ee91727259c47accabd6b782f6d7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.08
+      value: -3.204
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6889ee91727259c47accabd6b782f6d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 16.81
+      value: 1.64
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6889ee91727259c47accabd6b782f6d7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.59
+      value: -4.54
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6889ee91727259c47accabd6b782f6d7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11737,7 +11737,7 @@ Transform:
   m_GameObject: {fileID: 1195059193}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.11, y: 4.5, z: 1.735}
+  m_LocalPosition: {x: -3.17, y: 4.57, z: 1.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15612,11 +15612,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac6eefaaec9a074ea6e84fa72b99907, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1060633300}
+  player: {fileID: 1060633302}
   puntoAlto: {fileID: 1520034045}
   puntoBajo: {fileID: 1029569032}
-  puntoAltoPeluche: {fileID: 0}
-  puntoBajoPeluche: {fileID: 0}
 --- !u!136 &1644157636
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -16150,7 +16148,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -16170,11 +16168,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac6eefaaec9a074ea6e84fa72b99907, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1060633300}
+  player: {fileID: 1060633302}
   puntoAlto: {fileID: 1195059193}
   puntoBajo: {fileID: 1527462066}
-  puntoAltoPeluche: {fileID: 0}
-  puntoBajoPeluche: {fileID: 0}
 --- !u!1001 &1699428484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18256,8 +18252,6 @@ MonoBehaviour:
   player: {fileID: 1060633302}
   puntoAlto: {fileID: 134834608}
   puntoBajo: {fileID: 262033062}
-  puntoAltoPeluche: {fileID: 599855701}
-  puntoBajoPeluche: {fileID: 1677347141}
 --- !u!136 &1915189733
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -18538,15 +18532,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5da12c64b663e3449b57ab5b6345ad62, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.04
+      value: 2.92
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5da12c64b663e3449b57ab5b6345ad62, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.13
+      value: 8.335
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5da12c64b663e3449b57ab5b6345ad62, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.17
+      value: -2.848
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5da12c64b663e3449b57ab5b6345ad62, type: 3}
       propertyPath: m_LocalRotation.w

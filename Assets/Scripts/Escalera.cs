@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,26 +10,18 @@ public class Escalera: MonoBehaviour
 {
     // Variable de apoyo para marcar cuando se encuentra en el area
     private bool estaCerca = false;
-    // Objeto vinculado al canvas que muestra el texto
-    //[SerializeField]private Canvas canvas;
     // Objeto para vincular la referencia al jugador
     [SerializeField] private Player player;
     // Objeto para vincular la referencia al punto alto de la escalera
     [SerializeField] private GameObject puntoAlto;
     // Objeto para vincular la referencia al punto bajo de la escalera
     [SerializeField] private GameObject puntoBajo;
-    [SerializeField] private GameObject puntoAltoPeluche;
-    [SerializeField] private GameObject puntoBajoPeluche;
-
-    // PuntoAltoPeluche, PuntoBajoPeluche + diferencia posicion + Repetir Lerp + Mirar el transform del peluche
 
     private bool enEscalera;
 
     // Start is called before the first frame update
     void Start()
     {
-        // Al iniciar el juego, el canvas se oculta
-        //canvas.enabled = false;
         enEscalera = false;
     }
 
@@ -46,14 +39,13 @@ public class Escalera: MonoBehaviour
 
             Vector3 posicionPuntoAltoPeluche = new Vector3(posicionPuntoAlto.x - 1, posicionPuntoAlto.y, posicionPuntoAlto.z - 1);
             Vector3 posicionPuntoBajoPeluche = new Vector3(posicionPuntoBajo.x - 1, posicionPuntoBajo.y, posicionPuntoBajo.z - 1);
-            // Obtener la posicion absoluta del jugador
-            Vector3 posicionPeluche = player.objeto.transform.position;
 
             // Verificar si el jugador esta mas cerca del punto alto o del punto bajo
             if (Vector3.Distance(posicionJugador, posicionPuntoAlto) < Vector3.Distance(posicionJugador, posicionPuntoBajo))
             {
                 // El jugador esta mas cerca del punto alto, por lo que se desplaza hacia abajo
                 StartCoroutine(Bajar(posicionPuntoAlto, posicionPuntoBajo));
+                // En caso de poseer un objeto, se inicia la corrutina del objeto
                 if (player.objeto != null)
                 {
                     StartCoroutine(BajarObjeto(posicionPuntoAltoPeluche, posicionPuntoBajoPeluche));
@@ -63,6 +55,7 @@ public class Escalera: MonoBehaviour
             {
                 // El jugador esta mas cerca del punto bajo, por lo que se desplaza hacia arriba
                 StartCoroutine(Subir(posicionPuntoBajo, posicionPuntoAlto));
+                // En caso de poseer un objeto, se inicia la corrutina del objeto
                 if (player.objeto != null)
                 {
                     StartCoroutine(SubirObjeto(posicionPuntoBajoPeluche, posicionPuntoAltoPeluche));
@@ -79,8 +72,6 @@ public class Escalera: MonoBehaviour
         // Comprobacion de que ese objeto sea el del jugador
         if (other.CompareTag("Jugador"))
         {
-            // Activacion del objeto que muestra el texto
-            //canvas.enabled = true;
             // Activacion del indicador de zona
             estaCerca = true;
         }
@@ -93,8 +84,6 @@ public class Escalera: MonoBehaviour
     {
         if (other.CompareTag("Jugador"))
         {
-            // Desactivacion del objeto que muestra el texto
-            //canvas.enabled = false;
             // Desactivacion del indicador de zona
             estaCerca = false;
         }
@@ -105,7 +94,7 @@ public class Escalera: MonoBehaviour
         // Variable para el tiempo transcurrido
         float t = 0f;
         // Tiempos asignados a cada movimiento
-        float tiempoVertical = 2f;
+        float tiempoVertical = MathF.Ceiling(Vector3.Distance(fin, inicio) / 3f);
         float tiempoHorizontal = 1f;
 
         player.objeto.subiendo = true;
@@ -140,7 +129,7 @@ public class Escalera: MonoBehaviour
         // Variable para el tiempo transcurrido
         float t = 0f;
         // Tiempos asignados a cada movimiento
-        float tiempoVertical = 2f;
+        float tiempoVertical = MathF.Ceiling(Vector3.Distance(fin, inicio) / 3f);
         float tiempoHorizontal = 1f;
 
         player.objeto.GetComponent<Rigidbody>().useGravity = false;
@@ -183,7 +172,7 @@ public class Escalera: MonoBehaviour
         // Variable para el tiempo transcurrido
         float t = 0f;
         // Tiempos asignados a cada movimiento
-        float tiempoVertical = 2f;
+        float tiempoVertical = MathF.Ceiling(Vector3.Distance(fin, inicio) / 3f);
         float tiempoHorizontal = 1f;
 
         enEscalera = true;
@@ -224,7 +213,7 @@ public class Escalera: MonoBehaviour
         // Variable para el tiempo transcurrido
         float t = 0f;
         // Tiempos asignados a cada movimiento
-        float tiempoVertical = 2f;
+        float tiempoVertical = MathF.Ceiling(Vector3.Distance(fin, inicio) / 3f);
         float tiempoHorizontal = 1f;
 
         enEscalera = true;
