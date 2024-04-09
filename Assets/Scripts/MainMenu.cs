@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
@@ -26,8 +25,8 @@ private string selectedDifficulty = "Normal";
 #region Elementos de interfaz de usuario
 public Button ReturnButton;
 public Slider progressBar;
-public TextMeshProUGUI PressAnyKey;
-public TextMeshProUGUI Loading;
+//public TextMeshProUGUI PressAnyKey;
+//public TextMeshProUGUI Loading;
 #endregion
 
 #region Elementos específicos de configuración
@@ -56,8 +55,8 @@ private Coroutine LoadingCoroutine;
     {
         // Desactivar elementos de UI al inicio, excepto el texto de carga
         progressBar.gameObject.SetActive(false); 
-        PressAnyKey.gameObject.SetActive(false);
-        Loading.gameObject.SetActive(true); 
+        //PressAnyKey.gameObject.SetActive(false);
+        //Loading.gameObject.SetActive(true); 
 
         // Iniciar la corrutina para el texto de carga
         LoadingCoroutine = StartCoroutine(FadeLoading()); 
@@ -107,7 +106,7 @@ private Coroutine LoadingCoroutine;
         }
 
         // Mostrar el texto "Press Any Key" al completarse la carga
-        PressAnyKey.gameObject.SetActive(true);
+        //PressAnyKey.gameObject.SetActive(true);
         PressAnyKeyCoroutine = StartCoroutine(Parpadear());
 
         // Esperar a que el jugador presione cualquier tecla
@@ -122,11 +121,11 @@ private Coroutine LoadingCoroutine;
     {
         while (true)
         {
-            Color colorActual = PressAnyKey.color;
+            //Color colorActual = PressAnyKey.color;
             float alpha = Mathf.PingPong(Time.time * velocidadParpadeo, 1); // Calcular el valor de alpha para el parpadeo
 
-            colorActual.a = alpha; // Establecer el valor de alpha en el color actual
-            PressAnyKey.color = colorActual; // Aplicar el color al texto
+            //colorActual.a = alpha; // Establecer el valor de alpha en el color actual
+            //PressAnyKey.color = colorActual; // Aplicar el color al texto
 
             yield return null;
         }
@@ -137,11 +136,11 @@ private Coroutine LoadingCoroutine;
     {
         while (true)
         {
-            Color colorActual = Loading.color;
+            //Color colorActual = Loading.color;
             float alpha = Mathf.PingPong(Time.time * velocidadParpadeo, 1); // Calcular el valor de alpha para el parpadeo
 
-            colorActual.a = alpha; // Establecer el valor de alpha en el color actual
-            Loading.color = colorActual; // Aplicar el color al texto
+            //colorActual.a = alpha; // Establecer el valor de alpha en el color actual
+            //Loading.color = colorActual; // Aplicar el color al texto
 
             yield return null;
         }

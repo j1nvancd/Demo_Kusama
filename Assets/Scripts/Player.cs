@@ -150,4 +150,9 @@ public class Player : MonoBehaviour
             objeto = null;
         }
     }
+
+    public bool ObjetoInicial()
+    {
+        return objeto == null;
+    }
 }

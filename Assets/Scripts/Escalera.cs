@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 /*
  * Script vinculado al GameObject de la escalera - Escalera
@@ -244,4 +245,8 @@ public class Escalera: MonoBehaviour
         enEscalera = false;
     }
 
+    public bool ComprobarEstadoInicial()
+    {
+        return enEscalera || estaCerca;
+    }
 }
