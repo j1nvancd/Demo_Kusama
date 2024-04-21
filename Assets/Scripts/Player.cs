@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 /*
@@ -7,24 +6,26 @@ using UnityEngine;
  */
 public class Player : MonoBehaviour
 {
-    // Variable para almacenar el valor de la velocidad de movimiento que se aplicar� al personaje
+    // Variable para almacenar el valor de la velocidad de movimiento que se aplicará al personaje
     [SerializeField] private float velocidadMovimiento = 2f;
     // Variable interna dedicada al input introducido por el jugador para el eje horizontal
     private float horizontalInput;
     // Variable interna dedicada al input introducido por el jugador para el eje vertical
     private float verticalInput;
     // Elemento Raycast
-    Ray ray;
-    // Objeto estatico del jugador para el resto de scripts
+    private Ray ray;
+    // Objeto estático del jugador para el resto de scripts
     public static Player jugador;
     // Variable para almacenar el objeto que lleva
     public Objeto objeto;
     // Variable para almacenar el estado del mechero. True = mechero recogido
     public bool mechero = false;
+     // Variable para almacenar la posición inicial del toque
+    private Vector3 direccion = Vector3.zero;
 
     private void Awake()
     {
-        // Asignacion de la instancia del jugador mediante patron Singleton
+        // Asignación de la instancia del jugador mediante patrón Singleton
         if (jugador == null)
         {
             jugador = this;
@@ -34,23 +35,60 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Creacion del Raycast
+        // Creación del Raycast
         ray = new Ray(transform.position, -transform.up);
     }
 
     // Update is called once per frame
     void Update()
     {
+#if UNITY_ANDROID
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
+        Vector3 direccion = new Vector3(horizontalInput, 0,  verticalInput);
+        movimientoPantalla(direccion);
+        raycast(horizontalInput, verticalInput);
+#else
         movimiento();
         raycast(horizontalInput, verticalInput);
+#endif
     }
+    
+public void CancelarMovimiento()
+{
+    direccion = Vector3.zero;
+}
+private void movimientoPantalla(Vector3 direccion)
+{
+    transform.Translate(direccion * velocidadMovimiento * Time.deltaTime);
+}
+
+public void MoverArriba()
+{
+    movimientoPantalla(transform.forward);
+}
+
+public void MoverAbajo()
+{
+    movimientoPantalla(-transform.forward);
+}
+
+public void MoverIzquierda()
+{
+   movimientoPantalla(-transform.right); 
+}
+
+public void MoverDerecha()
+{
+    movimientoPantalla(transform.right);
+}
 
     /*
-     * Metodo de apoyo para el movimiento del objeto
+     * Método de apoyo para el movimiento del objeto
      */
     private void movimiento() 
     {
-        // Variables de apoyo para almacenar que direccion se bloqueara (Visto desde arriba)
+        // Variables de apoyo para almacenar qué dirección se bloqueará (visto desde arriba)
         // Movimiento Horizontal
         bool horPos = true;
         bool horNeg = true;
@@ -58,17 +96,16 @@ public class Player : MonoBehaviour
         bool verPos = true;
         bool verNeg = true;
 
-
         // Recogida de los inputs del jugador
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        // Se comprueba si el Raycast esta colisionando con algo(Si colisiona con algo es con el suelo)
+        // Se comprueba si el Raycast está colisionando con algo (Si colisiona con algo es con el suelo)
         if (Physics.Raycast(ray.origin, ray.direction, 1))
         {
-            // Desplazamiento del objeto en funcion de los inputs, la velocidad y el tiempo
+            // Desplazamiento del objeto en función de los inputs, la velocidad y el tiempo
             transform.Translate(new Vector3(horizontalInput, 0, verticalInput) * velocidadMovimiento * Time.deltaTime);
-            // En caso de seguir detectando colision, se puede desplazar en cualquier direccion
+            // En caso de seguir detectando colisión, se puede desplazar en cualquier dirección
             horPos = true;
             horNeg = true;
             verPos = true;
@@ -76,61 +113,60 @@ public class Player : MonoBehaviour
         }
         else
         {
-            // En funcion del valor de la direccion, se bloquea hacia un lado u otro.
+            // En función del valor de la dirección, se bloquea hacia un lado u otro.
             // Se comprueban ambos para bloquear, en caso necesario, la diagonal
 
-            // Comprobacion del movimiento horizontal
+            // Comprobación del movimiento horizontal
             if (horizontalInput > 0)
             {
                 horPos = false;
-                
-            } else if (horizontalInput < 0)
+            } 
+            else if (horizontalInput < 0)
             {
                 horNeg = false;
             }
 
-            // Comprobacion del movimiento vertical
+            // Comprobación del movimiento vertical
             if (verticalInput > 0)
             {
                 verPos = false;
-
-            } else if (verticalInput < 0)
+            } 
+            else if (verticalInput < 0)
             {
                 verNeg = false;
             }
 
-            // Se aplican las restricciones necesarias en funcion de la direccion bloqueada
+            // Se aplican las restricciones necesarias en función de la dirección bloqueada
             float movimientoHorizontal = !horPos ? Mathf.Clamp(horizontalInput, -1, 0) : !horNeg ? Mathf.Clamp(horizontalInput, 0, 1) : 0;
             float movimientoVertical = !verPos ? Mathf.Clamp(verticalInput, -1, 0) : !verNeg ? Mathf.Clamp(verticalInput, 0, 1) : 0;
             // Desplazamiento aplicando las distintas restricciones
             transform.Translate(new Vector3(movimientoHorizontal, 0, movimientoVertical) * velocidadMovimiento * Time.deltaTime);
-
         }
+
         // Herramienta para el desarrollo para mostrar el raycast
         Debug.DrawRay(ray.origin, ray.direction);
-
     }
 
     /*
-     * Metodo de apoyo para la creacion y actualizacion del raycast
+     * Método de apoyo para la creación y actualización del raycast
      */
     private void raycast(float posX, float posZ)
     {
-        // Modificacion de los valores
+        // Modificación de los valores
         posX = posX > 0 ? 0.1f : posX < 0 ? -0.1f : 0;
         posZ = posZ > 0 ? 0.1f : posZ < 0 ? -0.1f : 0;
-        // Actualizacion del raycast
+        // Actualización del raycast
         ray = new Ray(new Vector3(transform.position.x + posX, transform.position.y, transform.position.z + posZ), -transform.up);
     }
 
     /*
-     * Metodo para recoger el objeto deseado
+     * Método para recoger el objeto deseado
      * 
-     * Parametros: Object
+     * Parámetros: Objeto
      */
     public void recogerObjeto(Objeto objeto)
     {
-        // En caso de ser nulo(no tiene objeto vinculado/recogido) se asigna el objeto
+        // En caso de ser nulo (no tiene objeto vinculado/recogido) se asigna el objeto
         if (this.objeto == null)
         {
             this.objeto = objeto;
@@ -138,7 +174,7 @@ public class Player : MonoBehaviour
     }
 
     /*
-     * Metodo para soltar el objeto
+     * Método para soltar el objeto
      */
     public void soltarObjeto()
     {
