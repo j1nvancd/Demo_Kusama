@@ -23,6 +23,12 @@ public class Player : MonoBehaviour
      // Variable para almacenar la posición inicial del toque
     private Vector3 direccion = Vector3.zero;
 
+    private bool estadoMovimiento = false;
+    private bool movimientoArriba = false;
+    private bool movimientoAbajo = false;
+    private bool movimientoDerecha = false;
+    private bool movimientoIzquierda = false;
+
     private void Awake()
     {
         // Asignación de la instancia del jugador mediante patrón Singleton
@@ -42,46 +48,96 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-#if UNITY_ANDROID
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
+        /*horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");*/
         Vector3 direccion = new Vector3(horizontalInput, 0,  verticalInput);
-        movimientoPantalla(direccion);
-        raycast(horizontalInput, verticalInput);
-#else
-        movimiento();
-        raycast(horizontalInput, verticalInput);
-#endif
+        //movimientoPantalla(direccion);
+        //raycast(horizontalInput, verticalInput);
+        //movimiento();
+        //raycast(horizontalInput, verticalInput);*/
+       
+            movimientoPantalla();
+        
     }
+
+    
     
 public void CancelarMovimiento()
 {
     direccion = Vector3.zero;
 }
-private void movimientoPantalla(Vector3 direccion)
+private void movimientoPantalla()
 {
-    transform.Translate(direccion * velocidadMovimiento * Time.deltaTime);
-}
+       if (movimientoArriba)
+        {
+            transform.Translate(transform.forward * velocidadMovimiento * Time.deltaTime);
+        }
 
+        if (movimientoAbajo)
+        {
+            transform.Translate(-transform.forward * velocidadMovimiento * Time.deltaTime);
+        }
+
+        if (movimientoIzquierda)
+        {
+            transform.Translate(-transform.right * velocidadMovimiento * Time.deltaTime);
+        }
+
+        if (movimientoDerecha)
+        {
+            transform.Translate(transform.right * velocidadMovimiento * Time.deltaTime);
+        }
+
+
+
+
+
+    }
+
+    public void CambiarEstado()
+    {
+        estadoMovimiento = !estadoMovimiento;
+        Debug.Log("Cambio de estado a " + estadoMovimiento);
+    }
 public void MoverArriba()
 {
-    movimientoPantalla(transform.forward);
+    movimientoArriba = true;
 }
+
+    public void CancelarArriba()
+    {
+        movimientoArriba = false;
+    }
 
 public void MoverAbajo()
 {
-    movimientoPantalla(-transform.forward);
+        movimientoAbajo = true;
 }
 
-public void MoverIzquierda()
+    public void CancelarAbajo()
+    {
+        movimientoAbajo = false;
+    }
+
+    public void MoverIzquierda()
 {
-   movimientoPantalla(-transform.right); 
+   movimientoIzquierda = true;
 }
 
-public void MoverDerecha()
+    public void CancelarIzquierda()
+    {
+        movimientoIzquierda = false;
+    }
+
+    public void MoverDerecha()
 {
-    movimientoPantalla(transform.right);
+    movimientoDerecha = true;
 }
+
+    public void CancelarDerecha()
+    {
+        movimientoDerecha = false;
+    }
 
     /*
      * Método de apoyo para el movimiento del objeto
