@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Mechero : MonoBehaviour
+public class Mechero : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Canvas canvas;
     private bool estaCerca;
     Player jugador;
+
     private void Start()
     {
         estaCerca = false;
@@ -14,14 +16,17 @@ public class Mechero : MonoBehaviour
         jugador = FindObjectOfType<Player>();
     }
 
-    private void Update()
+    public void OnPointerClick(PointerEventData eventData)
     {
-        if (estaCerca && Input.GetMouseButtonUp(0))
+        if (estaCerca)
         {
-            jugador.mechero = true;
-            Destroy(gameObject);
+            if (eventData.pointerId == -1) // -1 indica clic izquierdo (táctil en Android)
+            {
+                EncenderMechero();
+            }
         }
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Jugador"))
@@ -35,8 +40,14 @@ public class Mechero : MonoBehaviour
     {
         if (other.CompareTag("Jugador"))
         {
-            estaCerca=false;
+            estaCerca = false;
             canvas.enabled = false;
         }
+    }
+
+    private void EncenderMechero()
+    {
+        jugador.mechero = true;
+        Destroy(gameObject);
     }
 }
