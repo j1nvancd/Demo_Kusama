@@ -70,22 +70,22 @@ private void movimientoPantalla()
 {
        if (movimientoArriba)
         {
-            transform.Translate(transform.forward * velocidadMovimiento * Time.deltaTime);
+            transform.Translate(transform.forward * velocidadMovimiento/2 * Time.deltaTime);
         }
 
         if (movimientoAbajo)
         {
-            transform.Translate(-transform.forward * velocidadMovimiento * Time.deltaTime);
+            transform.Translate(-transform.forward * velocidadMovimiento / 2 * Time.deltaTime);
         }
 
         if (movimientoIzquierda)
         {
-            transform.Translate(-transform.right * velocidadMovimiento * Time.deltaTime);
+            transform.Translate(-transform.right * velocidadMovimiento / 2 * Time.deltaTime);
         }
 
         if (movimientoDerecha)
         {
-            transform.Translate(transform.right * velocidadMovimiento * Time.deltaTime);
+            transform.Translate(transform.right * velocidadMovimiento / 2 * Time.deltaTime);
         }
 
 
