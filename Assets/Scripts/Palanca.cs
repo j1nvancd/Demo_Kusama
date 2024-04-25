@@ -24,9 +24,7 @@ public class Palanca : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0) && estaCerca && !activado)
         {
-            animator.Play("AnimacionCuchilla");
-            activado = true;
-            canvas.enabled = false;
+            ActivarPalanca();
         }
     }
 
@@ -46,5 +44,12 @@ public class Palanca : MonoBehaviour
             canvas.enabled = false;
             estaCerca=false;
         }
+    }
+
+    public void ActivarPalanca()
+    {
+        animator.Play("AnimacionCuchilla");
+        activado = true;
+        canvas.enabled = false;
     }
 }

@@ -45,7 +45,7 @@ public class Mechero : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    private void EncenderMechero()
+    public void EncenderMechero()
     {
         jugador.mechero = true;
         Destroy(gameObject);
